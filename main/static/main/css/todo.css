@@ -1,0 +1,238 @@
+div.category li.title {
+    margin-top: 10px;
+    margin-left: 46px;
+    font-family: Manrope,sans-serif!important;
+    display: inline-block;
+    color: #000;
+    font-size: 28px;
+    font-weight: 700;
+    transition: transform .3s ease;
+}
+
+
+div.category li.cats_title {
+    hyphens: auto;
+    font-family: Manrope,sans-serif!important;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+    color: #000;
+    font-size: 18px;
+    transition: transform .1s ease;
+}
+
+div.category li:hover {
+    color: var(--color1);
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+div.noteleft .grid_note {
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    height: fit-content;
+}
+
+ul.note {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+li.note {
+    width: 45vh;
+    height: 40vh;
+    text-align: left;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+    padding: 0.8rem;
+    box-shadow: 2px 2px 6px #4d4d4d;
+    border-radius: 10px;
+    background: var(--color5);
+}
+
+li.note p {white-space: pre-line}
+
+div.newNote_head {
+    display: grid;
+    margin-top: 5px;
+    margin-left: 5px;
+    grid-template-columns: 22vh 114vh;
+    grid-template-rows: 8vh;
+}
+
+div.newNote_head button {
+    display: inline-block;
+    align-self: center;
+    justify-self: center;
+    width: 175px;
+    height: 57px;
+    background: #6b6f7e;
+    border: none;
+    font-size: 16px;
+    transition: transform .5s ease;
+}
+
+div.newNote_head button:hover, button.edit:hover, button.delete:hover {
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+.newNote_title {
+    align-self: center;
+    margin-left: -200px;
+    justify-self: center;
+}
+
+a.note_title {
+    display: inline-block;
+    color: #000;
+    font-weight: bolder;
+}
+
+a.note_title:hover {
+    color: var(--color3);
+    text-decoration: underline;
+    transform: scale(1.02);
+}
+
+h3.note_title {
+    font-size: 32px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+input.note_input {
+    width: 85vh;
+    height: 5vh;
+    font-size: 18px;
+    color: #000;
+    border: 1px solid #e4e7e9;
+}
+
+textarea.note_textarea {
+    width: 85vh;
+    height: 85vh;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #e4e7e9;
+}
+
+.note_description {
+    height: 240px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical
+}
+
+button.edit {
+    position: absolute;
+    bottom: 5px;
+    right: 117px;
+    font-size: 12px;
+    background: #6b6f7e;
+    border: none;
+    width: 107px;
+    transition: transform .5s ease;
+}
+
+button.delete {
+    position: absolute;
+	bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    background: #7e6b72;
+    border: none;
+    width: 107px;
+    transition: transform .5s ease;
+}
+
+div.getCategories .grid_Categories {
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    height: fit-content;
+}
+
+div.newCategories_head {
+    display: grid;
+    margin-top: 5px;
+    margin-left: 5px;
+    grid-template-columns: 22vh 114vh;
+    grid-template-rows: 8vh;
+}
+
+div.newCategories_head button {
+    display: inline-block;
+    align-self: center;
+    justify-self: center;
+    margin-left: 10px;
+    width: 200px;
+    height: 57px;
+    background: #6b6f7e;
+    border: none;
+    font-size: 16px;
+    transition: transform .5s ease;
+}
+
+div.newCategories_head button:hover, button.edit:hover, button.delete:hover {
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+ul.Categories {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+li.Categories {
+    width: 45vh;
+    height: 15vh;
+    text-align: center;
+    font-size: 20px;
+    display: inline-block;
+    position: relative;
+    padding: 0.8rem;
+    background: var(--color5);
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px #4d4d4d;
+    margin: 5px;
+}
+
+li.Categories p {white-space: pre-line}
+
+h3.Categories_title {
+    align-self: center;
+    margin-left: -200px;
+    justify-self: center;
+}
+
+b.сategories_title {
+    display: inline-block;
+    color: #000;
+    transition: transform .1s ease;
+}
+
+b.сategories_title:hover {
+    color: var(--color3);
+    text-decoration: underline;
+    transform: scale(1.02);
+}
+
+.mbtn {
+    width: 160px;
+    margin: 15px 20px 20px 0;
+    background: #6b6f7e;
+    border: none;
+    font-size: 16px;
+    transition: transform .3s ease;
+}
+
+.mbtn:hover {
+    text-decoration: none;
+    transform: scale(1.03);
+}

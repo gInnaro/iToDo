@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block main %}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <div class="containers_body">
+    <div class="containers Register">
+      <div class="curved-shape2"></div>
+        <div class="form-box Register">
+          <h2>Register</h2>
+          <form class="form-signup" method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="input-box">
+              <input type="text" required name="username" >
+              <label for="">Username</label>
+              <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+              <input type="email" name="email" required>
+              <label for="">Email</label>
+              <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="input-box">
+              <input type="password" name="password1" required>
+              <label for="">Password</label>
+              <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="input-box">
+              <input type="password" name="password2" required>
+              <label for="">Password 2</label>
+              <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="input-box">
+              <button class="btns" type="submit">Register</button>
+            </div>
+            <div class="regi-link">
+              <p>Don`t have an account ? <a href="{% url 'logins' %}" class="SignUpLink">Sign In</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

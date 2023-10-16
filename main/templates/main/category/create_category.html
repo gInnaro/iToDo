@@ -1,0 +1,20 @@
+{% extends "main/layout.html" %}
+{% block title %}
+{{ cats_title }} - все заметки
+{% endblock %}
+{% block content %}
+
+<div class="categoty_edit title newNote_head">
+            <a href="{% url 'category' %}"><button class="btn btn-primary btn-lg btn-block">Назад</button></a>
+            <h1 class="newNote_title">Создать категории</h1>
+        </div>
+<form action="{% url 'create_category' %}" method="post" class="create_note">
+    <div class="container input-note">
+        {% csrf_token %}
+        {{ form.title }}
+        <div class="control-panel">
+            <button type="submit" class="btn btn-primary mbtn"><i class="uil uil-notes"></i> Добавить заметку</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

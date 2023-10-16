@@ -1,0 +1,40 @@
+{% extends "main/layout.html" %}
+{% block title %}
+{{ cats_title }} - все заметки
+{% endblock %}
+{% block content %}
+
+<div class="noteleft">
+    <ul class="note">
+        <div class="newNote_head">
+            <a href="{% url 'create_note' %}"><button id='newNote' class="btn btn-success btn-lg btn-block">Создать заметку</button></a>
+            <h3 class="newNote_title">Заметки в категории <br><span class="fw-bold">{{ cats_title }}</span></h3>
+        </div>
+        <div class="grid_note">
+        {% for note_cat in note_cats %}
+            <li class="note">
+                <a href="{% url 'note_detail' note_cat.id %}" class="note_title">{{ note_cat.title }}</a>
+                <p class="note_description" id="note_{{note_cat.id}}">{{ note_cat.description }}</p>
+                <button id="{{note_cat.id}}" title="{{ note_cat.title }}" onclick="JavaScript:return Validator(this.id);" class="btn btn-danger delete btn_addition">Удалить</button>
+            </li>
+        {% endfor %}
+        </div>
+        <script>
+            function Validator(id_){
+               var ttt= document.getElementById(id_);
+               if(confirm("Вы точно хотите удалить заметку "+ttt.title+" ?") ){
+                 document.location.href = 'delete_'+ ttt.id;
+               }
+            }
+        </script>
+    </ul>
+</div>
+<div class="noteright">
+    <form method="post" class="note_form" id="note-form" style="display:none;" action=''>
+        {% csrf_token %}
+        {{ form.title }}
+        {{ form.description }}
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Добавить заметку</button>
+    </form>
+</div>
+{% endblock %}

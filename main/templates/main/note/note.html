@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Приложение Notes{% endblock %}
+
+{% block content %}
+<div class="noteleft">
+    <ul class="note">
+        <div class="newNote_head">
+            <a href="{% url 'create_note' %}"><button id='newNote' class="btn btn-success btn-lg btn-block btn_create">Создать заметку</button></a>
+            <h3 class="newNote_title">Все заметки {{ request.user.username }}</h3>
+        </div>
+        <div class="grid_note">
+            {% for note in notes %}
+            <li class="note">
+                <a href="{% url 'note_detail' note.id %}" class="note_title">{{ note.title }}</a>
+                <p class="note_description">{{ note.description }}</p>
+                <p class="note_cate">Категория: {{ note.category_id}}</p>
+                <button id="{{note.id}}" title="{{ note.title }}" onclick="JavaScript:return Validator(this.id);" class="btn btn-danger delete btn_addition">Удалить</button>
+            </li>
+            {% endfor %}
+        </div>
+        <script>
+            function Validator(id_){
+               var ttt= document.getElementById(id_);
+               if(confirm("Вы точно хотите удалить заметку "+ttt.title+" ?") ){
+                 document.location.href = 'category/delete_'+ ttt.id;
+               }
+            }
+        </script>
+    </ul>
+
+</div>
+<div class="noteright">
+</div>
+{% endblock %}

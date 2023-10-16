@@ -1,0 +1,42 @@
+{% extends "main/layout.html" %}
+{% block title %}
+Редактирование {{ cats }}
+{% endblock %}
+{% block content %}
+    <div class="categoty_edit">
+        <div class="categoty_edit title newNote_head">
+            <a href="{% url 'category' %}"><button class="btn btn-primary btn-lg btn-block">Назад</button></a>
+            <h3 class="newNote_title">Редактирование категории: <br><span class="fw-bold">{{ cats }}</span></h3>
+        </div>
+        <div class="category_edit edit">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" id="category_edit_title" name="category_edit_title" placeholder="{{ cats }}">
+                {{ err }}
+                <button name="submit" disabled="disabled" class="mbtn btn btn-primary" title="{{ cats }}" id="submitBtn" onclick="JavaScript:return ValidatorEdit(this.id);">Сохранить</button>
+                <button name="exit" class="mbtn btn btn-primary" >Отмена</button></a>
+            </form>
+        </div>
+        <script>
+            const category_edit_title = document.getElementById('category_edit_title');
+            const submitBtn = document.getElementById('submitBtn');
+
+            function validateInputs() {
+              if (category_edit_title.validity.valid !== '') {
+                submitBtn.removeAttribute('disabled');
+              } else {
+                submitBtn.setAttribute('disabled', 'disabled');
+              }
+            }
+
+            category_edit_title.addEventListener('input', validateInputs);
+            function ValidatorEdit(id_){
+               var ttt= document.getElementById(id_);
+               if(confirm("Вы точно хотите изменить название категории "+ttt.title+" ?") ){
+                 document.location.href = '';
+               }
+            }
+        </script>
+    </div>
+
+{% endblock %}

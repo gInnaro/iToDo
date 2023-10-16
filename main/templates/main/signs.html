@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block main %}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <div class="containers_body">
+    <div class="containers Login">
+      <div class="curved-shape"></div>
+        <div class="form-box Login">
+          <h2>Login</h2>
+          <form action="{% url 'logins' %}" autocomplete="off" method="post">
+            {% csrf_token %}
+            <div class="input-box">
+              <input type="text" name="username" required>
+              <label for="">Username</label>
+              <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+              <input name="password" required onfocus="this.setAttribute('type', 'password');" type="text">
+              <label for="">Password</label>
+              <i class="bx bxs-lock-alt"></i>
+            </div>
+            {% if error != '' %}
+              <div class="input-box">
+                {{ error }}
+              </div>
+            {% endif %}
+            <div class="input-box">
+              <button class="btns" type="submit">Login</button>
+            </div>
+            <div class="regi-link">
+              <p>Don`t have an account ? <a href="{% url 'signup' %}" class="SignUpLink">Sign Up</a></p>
+            </div>
+          </form>
+        </div>
+      <div class="info-content Login">
+        <h2>WELCOME BACK!</h2>
+        <p>С возвращением</p>
+      </div>
+      </div>
+    </div>
+{% endblock %}

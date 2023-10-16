@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block main %}
+<div class="main-info">
+    <h1>Главная страница</h1>
+    {% for text in data %}
+    <div class="info-table">
+        <h3>{{ text.title }}</h3>
+        <label>{{ text.description }}</label>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

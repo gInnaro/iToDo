@@ -1,0 +1,70 @@
+{% load main_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script async="" type="text/javascript" src="http://yandex.st/jquery/2.0.3/jquery.js"></script>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/todo.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="table">
+        <div class="middle">
+            <div class="middleleft">
+                <div class="logo">
+                    {% if user.is_authenticated == True %}
+                        <a href="{% url 'note' %}"><img src="{% static 'main/img/logo.png' %}" alt="Лого" width="150"></a></div>
+                    {% else %}
+                        <a href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}" alt="Лого" width="150"></a></div>
+                    {% endif %}
+                <div class="signs">
+                    {% if user.is_authenticated == False %}
+                    <div class="logins">
+                        <a href="{% url 'logins' %}"><button class="btn-main" type="button">Вход</button></a>
+                        <a href="{% url 'signup' %}"><button class="btn-main" type="button">Регистрация</button></a>
+                        </div>
+                    {% else %}
+                    <div class="signs_suc">
+                        <label class="usersign">Привет, {{ user.username|default:'Guest' }}</label>
+                        <a href="{% url 'logout' %}"><label class="sign"> Выход</label></a>
+                    </div>
+                  {% endif %}
+                </div>
+                {% if user.is_authenticated == True %}
+                <div class="category">
+                    <a href="{% url 'category' %}"><li class="title">Категории</li></a>
+                    {% note username=user.username as notes %}
+                    {% cat username=user.username as categories %}
+                    {% for category in categories %}
+                      <a href="/category/{{ category.id }}"><li class="cats_title">{{ category.title }}</li></a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="middlecenter">
+                {% if user.is_authenticated == True %}
+                    {% block content %}{% endblock %}
+                {% else %}
+                    {% if request.endpoint == 'home' or request.path == '/signup/'%}
+                        {% block main %}{% endblock %}
+                    {% else %}
+                      <div class="err_auth">
+                        <label>Для дальнейших действий нужно авторизироваться на сайте.</label>
+                        <div class="logins">
+                            <a href="{% url 'logins' %}"><button class="btn-main" type="button">Вход</button></a>
+                            <a href="{% url 'signup' %}"><button class="btn-main" type="button">Регистрация</button></a>
+                        </div>
+                      </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <h2>Регистрация</h2>
+    <form class="form-signup" method="POST" action="{% url 'signup' %}" >
+      {% csrf_token %}
+      <label for="fullname">Имя</label>
+      <input class="form-styling" type="text" name="username" placeholder=""/>
+      <label for="username">email</label>
+      <input type="email" name="email" class="form-styling">
+      <label for="password">пароль</label>
+      <input type="password" name="password1" class="form-styling">
+      <label for="password">Повторите пароль</label>
+      <input type="password" name="password2" class="form-styling">
+      <input type="checkbox" id="checkbox"/>
+      <label for="checkbox" ><span class="ui"></span>Keep me signed in</label>
+      <button type="submit" value='sign_up'>Регистрация</button>
+  </form>
+{% endblock %}

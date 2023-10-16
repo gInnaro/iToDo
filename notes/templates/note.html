@@ -1,0 +1,190 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Приложение Notes{% endblock %}
+
+{% block category %}
+
+<div x-data="getCategories()">
+   <h3 class="text-center mt-5" style="color:#777">все категории заметок пользователя <span class="fw-bold">{{ request.user.username }}</span></h3>
+    <form id="category-form">
+        {% csrf_token %}
+    </form>
+    <div class="container pt-5">
+<div class="input-group px-5">
+  <input x-model="newCategory" class="form-control" placeholder="Название категории">
+  <input x-model="newDescription" class="form-control" placeholder="Описание категории">
+  <button @click="addCategory(newCategory, newDescription)" type="button" class="btn btn-primary"><i class="uil uil-notes"></i> Добавить категорию</button>
+</div>
+<div class="card-group p-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+   <template x-for="category in categories">
+    <div class="col">
+     <div class="card h-100 bg-light">
+      <div class="card-header">
+       <h4 class="card-title text-center my-2"><a x-text="category.title"
+         x-bind:href="'/category/'+category.id"></a></h4>
+      </div>
+    <div class="card-body">
+      <p x-text="category.description" class="card-text pt-3 pb-3"></p>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary btn-sm">
+       <a x-bind:href="'/category/'+category.id" style="text-decoration: none; color:#fff;"><i class="uil uil-search"></i> Открыть</a>
+         <button @click="removeCategory(category.id)"
+         class="btn btn-danger btn-sm float-end"><i class="uil uil-trash-alt"></i> Удалить</button>
+      </div>
+     </div>
+    </div>
+   </template>
+</div>
+</div>
+
+
+</div>
+</div>
+<script>
+
+
+const getCategories = () => {
+    return {
+        newCategory: '',
+        newDescription: '',
+        categories: [
+            {% for category in categories %}
+            { 'title': '{{ category.title }}', 'id': '{{ category.id }}', 'description': '{{ category.description }}' },
+            {% endfor %}
+        ]
+    }
+};
+
+const csrftoken = document.querySelector('#category-form > input').value;
+
+
+const addCategory = async (title, description) => {
+    try {
+    const res = await axios.post('/api/category',
+        { title, description },
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const removeCategory = async categoryId => {
+    try {
+    const res = await axios.delete('/api/category/' + categoryId,
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div x-data="getNotes()">
+    <h3 class="text-center mt-5" style="color:#777">заметки в категории <span class="fw-bold">{{ category.title }}</span></h3>
+    <form id="note-form">
+        {% csrf_token %}
+    </form>
+    <div class="container pt-5">
+        <div class="input-group px-5">
+
+            <input name="note_title" class="form-control" placeholder="Текст заметки">
+            <input name="note_description" class="form-control" placeholder="Содержимое">
+            <select id="categorys" name="categorys">
+                {% for category in categorys %}
+                {{ category }}
+                {% endfor %}
+                <option value="apple">Яблоко</option>
+            </select>
+            <button @click="addNote(newNote, {{ category.id }} )" class="btn btn-primary"><i class="uil uil-notes"></i> Добавить заметку</button>
+        </div>
+    </div>
+<div class="container pt-5">
+ <div class="card-group p-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+       <template x-for="note in notes">
+        <div class="col">
+          <div class="card h-100 bg-light mb-3">
+            <div class="card-header">
+                <button @click="removeNote(note.id)" class="btn btn-danger"><i class="uil uil-trash-alt"></i> Удалить</button></div>
+                <div class="card-body">
+                  <p x-text="note.title" class="card-text pt-3 pb-3"></p>
+                </div>
+               <div class="card-footer">
+                <button @click="updateNote(note.id, false)"
+                        x-show="note.status == 'True'" class="btn btn-success float-end"><i class="uil uil-check"></i> Сделано</button>
+                <button @click="updateNote(note.id, true)"
+                        x-show="note.status == 'False'" class="btn btn-warning float-end"><i class="uil uil-rocket"></i> В процессе</button>
+                </div>
+         </div>
+        </div>
+       </template>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+
+const csrftoken = document.querySelector('#note-form > input').value;
+
+
+const getNotes = () => {
+    return {
+        newNote: '',
+        notes: [
+            {% for note in category.notes.all %}
+            { 'title': '{{ note.title }}', 'id': '{{ note.id }}', 'status': '{{ note.completed }}' },
+            {% endfor %}
+        ]
+    }
+};
+
+const addNote = async (title, categoryId) => {
+    try {
+    const res = await axios.post('/api/notes',
+        { title, category_id: categoryId },
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const removeNote = async noteId => {
+    try {
+    const res = await axios.delete('/api/notes/' + noteId,
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNote = async (noteId, noteStatus) => {
+    try {
+    const res = await axios.patch('/api/notes/' + noteId,
+        { id: noteId, completed: noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+
+</script>
+
+{% endblock %}
