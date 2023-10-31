@@ -42,7 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'gpt',
+    'rest_framework',
+    'api.apps.ApiConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny'
+    ],
+}
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = "/"

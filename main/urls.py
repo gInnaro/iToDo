@@ -1,7 +1,6 @@
 from django.urls import path, include, re_path
 from . import views
 
-# app_name = 'notes'
 urlpatterns = [
     path('', views.Category_views.home, name='home'),
     path('note', views.Category_views.note, name='note'),

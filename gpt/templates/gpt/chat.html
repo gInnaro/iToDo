@@ -1,0 +1,120 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Чат с GPT{% endblock %}
+
+{% block content %}
+</style>
+<div class="conversation">
+    <div class="box" id="messages"></div>
+    <div class="user-input">
+        <div class="box input-boxs">
+            <textarea id="message-input" placeholder="Задать вопрос" cols="30" rows="10" style="white-space: pre-wrap; height: 80px;"></textarea>
+            <div id="my_button"><i class="fa-regular fa-paper-plane-top"></i></div>
+        </div>
+    </div>
+    <div>
+        <div class="options-container">
+            <div class="buttons">
+                <div class="field">
+                    <select class="dropdown" name="model" id="model">
+                        <optgroup label="GPT">
+                            <option value="gpt-3.5-turbo">GPT-3.5-turbo</option>
+                            <option value="gpt-3.5-turbo-0613">GPT-3.5-turbo-0613</option>
+                            <option value="gpt-3.5-turbo-16k">GPT-3.5-turbo-16k</option>
+                            <option value="gpt-3.5-turbo-16k-0613">GPT-3.5-turbo-16k-0613</option>
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4-0613">GPT-4-0613</option>
+                            <option value="gpt-4-32k">GPT-4-32k</option>
+                            <option value="gpt-4-32k-0613">GPT-4-32k-0613</option>
+                        </optgroup>
+                        <optgroup label="LLAMA">
+                            <option value="llama2-7b">LLaMa2-7b</option>
+                            <option value="llama2-13b">LLaMa2-13b</option>
+                            <option value="llama2-70b">LLaMa2-70b</option>
+                            <option value="llama2-7b-v2-chat">LLaMa2-7b-v2-chat</option>
+                            <option value="llama2-13b-v2-chat">LLaMa2-13b-v2-chat</option>
+                            <option value="llama2-70b-v2-chat">LLaMa2-70b-v2-chat</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var addButton = document.getElementById('my_button');
+    function sendsAjax() {
+        var message= document.getElementById("message-input").value;
+        document.getElementById("message-input").value = '';
+        if (message.length > 0) {
+            (async () => {
+                await add_question(message);
+                await add_answer();
+                var selectElement = document.getElementById("model").value;
+                await $.ajax({
+                    url: "ans/"+selectElement+"&"+message,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        searchLastAnswer(data.answer);
+                    },
+                    error: function () {
+                        console.log("err");
+                    },
+                });
+            })();
+        } else {console.log('clear')}
+    };
+
+    function add_question(message) {
+        const gpt_question = message;
+        var createMessage = document.getElementById("messages")
+        createMessage.innerHTML += `
+            <div class="message">
+                <div class="avatar-container">
+                    <img src="{% static 'gpt/img/user.png' %}" alt="User Avatar">
+                </div>
+                <div class="content">
+                    <p class="question">${gpt_question}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function add_answer() {
+        var createMessage = document.getElementById("messages")
+        createMessage.innerHTML += `
+            <div class="message">
+                <div class="avatar-container">
+                    <img src="{% static 'gpt/img/gpt.png' %}" alt="GPT Avatar">
+                </div>
+                <div class="content">
+                    <p class="answer" style="
+                    width: 0;
+                    white-space: nowrap;
+                    border-right: .15em solid orange;
+                    animation: blink-caret .7s step-end infinite;"
+                    >text</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function searchLastAnswer(answer) {
+        const markdown = window.markdownit();
+        var lastAnswer = document.getElementsByClassName("answer");
+        var lastAnswerElement = lastAnswer[lastAnswer.length - 1];
+        lastAnswerElement.remove()
+        var lastСontent = document.getElementsByClassName("content");
+        var lastСontentElement = lastСontent[lastСontent.length - 1];
+        lastСontentElement.innerHTML = markdown.render(answer)
+    }
+
+    addButton.addEventListener('click', sendsAjax);
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@latest/dist/markdown-it.min.js"></script>
+
+
+{% endblock %}

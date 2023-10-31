@@ -1,12 +1,14 @@
 {% extends "main/layout.html" %}
-{% block title %}
-{{ cats_title }} - все заметки
-{% endblock %}
+{% block title %} Заметка {{ note.title }} {% endblock %}
 {% block content %}
   <div class="container edit_note">
+    <div class="note_head_title">
+      <a href="{% url 'detail' cats_title.id %}"><button class="btn btn-primary btn-lg btn-block">Назад</button></a>
+      <h3 class="note_title">{{ note.title }}</h3>
+    </div>
+
     <form method="POST">
       {% csrf_token %}
-      <h3 class="note_title">{{ note.title }}</h3>
       <textarea disabled id="note_description" name="note_description">{{ note.description }}</textarea>
       <div class="btn-note">
         <button id="edit_edit" class="btn btn-primary note-edit btn_addition mbtn" onclick="EditNote()">Редактировать</button>

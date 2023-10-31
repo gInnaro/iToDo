@@ -7,4 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     re_path(r'^accounts/', include('django.contrib.auth.urls')),
+    path('chat/', include('gpt.urls')),
+    path('api/', include('api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

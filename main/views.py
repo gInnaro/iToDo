@@ -9,9 +9,11 @@ from django.contrib.auth import authenticate, login
 
 class Category_views(TemplateView):
     def home(request):
-        request.endpoint = 'home'
-        data = Main.objects.all()
-        return render(request, 'main/index.html', {"data": data})
+        if request.user.is_authenticated != True:
+            request.endpoint = 'home'
+            data = Main.objects.all()
+            return render(request, 'main/index.html', {"data": data})
+        return redirect('note')
 
     def note(request):
         if request.user.is_authenticated == True:
@@ -27,7 +29,7 @@ class Category_views(TemplateView):
             if form.is_valid():
                 form.instance.authors = request.user
                 form = form.save()
-                return redirect('home')
+                return redirect('note')
         if request.user.is_authenticated == True:
             form = CategoryForm()
             data = {
@@ -77,7 +79,7 @@ class Note_views(TemplateView):
         note = Note.objects.filter(id=note_id)
         note.delete()
         if category_id == "main":
-            return redirect('home')
+            return redirect('note')
         else:
             return redirect('detail', category_id=category_id)
 
@@ -89,20 +91,21 @@ class Note_views(TemplateView):
                 form.instance.authors = request.user
                 form.instance.category_id_id = request.POST['input_note_category']
                 form.save()
-                return redirect('home')
+                return redirect('note')
         if request.user.is_authenticated == True:
             forms = NoteForm()
             return render(request, 'main/note/create_note.html', {'form': forms, 'categorys': category})
 
     def note_detail(request, note_id):
         note = Note.objects.get(id=note_id)
+        cats_title = Category.objects.get(title=note.category_id)
+        print(cats_title)
         if request.method == 'POST':
             if "save_edit" in request.POST:
                 text = request.POST['note_description']
-                print(text)
                 Note.objects.filter(id=note_id).update(description=text)
                 return redirect('note_detail', note_id)
-        return render(request, 'main/note/note_detail.html', {'note': note})
+        return render(request, 'main/note/note_detail.html', {'note': note, 'cats_title': cats_title})
 
 
 class RegisterUser(CreateView):

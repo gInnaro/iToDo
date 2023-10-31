@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Авторизация{% endblock %}
 
 {% block main %}
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -8,7 +8,7 @@
     <div class="containers Login">
       <div class="curved-shape"></div>
         <div class="form-box Login">
-          <h2>Login</h2>
+          <h2>Авторизация</h2>
           <form action="{% url 'logins' %}" autocomplete="off" method="post">
             {% csrf_token %}
             <div class="input-box">

@@ -1,6 +1,5 @@
-div.category li.title {
+.category li.title {
     margin-top: 10px;
-    margin-left: 46px;
     font-family: Manrope,sans-serif!important;
     display: inline-block;
     color: #000;
@@ -10,12 +9,11 @@ div.category li.title {
 }
 
 
-div.category li.cats_title {
+.category li.cats_title {
     hyphens: auto;
     font-family: Manrope,sans-serif!important;
     display: inline-block;
     margin-top: 10px;
-    margin-left: 20px;
     color: #000;
     font-size: 18px;
     transition: transform .1s ease;
@@ -41,7 +39,7 @@ ul.note {
 }
 
 li.note {
-    width: 45vh;
+    width: 97%;
     height: 40vh;
     text-align: left;
     margin: 5px;
@@ -58,8 +56,8 @@ li.note p {white-space: pre-line}
 div.newNote_head {
     display: grid;
     margin-top: 5px;
-    margin-left: 5px;
-    grid-template-columns: 22vh 114vh;
+    margin-left: 13px;
+    grid-template-columns: 9% 82% 9%;
     grid-template-rows: 8vh;
 }
 
@@ -82,8 +80,31 @@ div.newNote_head button:hover, button.edit:hover, button.delete:hover {
 
 .newNote_title {
     align-self: center;
-    margin-left: -200px;
     justify-self: center;
+}
+
+.note_head_title {
+    display: grid;
+    grid-template-columns: 9% 82% 9%;
+    grid-template-rows: 8vh;
+    align-items: center;
+}
+
+.note_head_title button {
+    display: inline-block;
+    align-self: center;
+    justify-self: center;
+    width: 175px;
+    height: 57px;
+    background: #6b6f7e;
+    border: none;
+    font-size: 16px;
+    transition: transform .5s ease;
+}
+
+.note_head_title button:hover {
+    text-decoration: none;
+    transform: scale(1.02);
 }
 
 a.note_title {
@@ -161,7 +182,7 @@ div.newCategories_head {
     display: grid;
     margin-top: 5px;
     margin-left: 5px;
-    grid-template-columns: 22vh 114vh;
+    grid-template-columns: 9% 82% 9%;
     grid-template-rows: 8vh;
 }
 
@@ -190,7 +211,7 @@ ul.Categories {
 }
 
 li.Categories {
-    width: 45vh;
+    width: 97%;
     height: 15vh;
     text-align: center;
     font-size: 20px;
@@ -207,7 +228,6 @@ li.Categories p {white-space: pre-line}
 
 h3.Categories_title {
     align-self: center;
-    margin-left: -200px;
     justify-self: center;
 }
 
@@ -225,7 +245,6 @@ b.сategories_title:hover {
 
 .mbtn {
     width: 160px;
-    margin: 15px 20px 20px 0;
     background: #6b6f7e;
     border: none;
     font-size: 16px;

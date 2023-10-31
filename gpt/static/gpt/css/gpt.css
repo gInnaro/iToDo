@@ -1,0 +1,50 @@
+:root {
+    --colour-1: #181818;
+    --colour-2: #ccc;
+    --colour-3: #dadada;
+    --colour-4: #f0f0f0;
+    --colour-5: #181818;
+    --colour-6: #242424;
+    --accent: #151718;
+    --blur-bg: #242627;
+    --blur-border: #242627;
+    --user-input: #f5f5f5;
+    --conversations: #555555;
+}
+
+html, body {
+    background: var(--colour-1);
+    color: var(--colour-3);
+}
+
+div.middleleft {
+    backdrop-filter: blur(20px);
+    background-color: var(--blur-bg);
+    color: var(--colour-3);
+}
+
+div.signs_suc label.sign,
+div.signs_suc label.usersign,
+div.category li.title,
+div.category li.cats_title
+{
+    color: var(--colour-3);
+}
+
+div.signs_suc label:hover, div.signs_suc a:hover {
+    color: #EFA94A;
+}
+
+div.table,
+div.middlecenter {
+    background: var(--colour-1);
+}
+
+div.middleleft {
+    margin: 18px 0;
+    border-radius: 10px;
+}
+
+div.conversation {
+    margin: 10px 0;
+}

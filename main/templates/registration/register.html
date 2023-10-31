@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Регистрация{% endblock %}
 
 {% block main %}
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -8,7 +8,7 @@
     <div class="containers Register">
       <div class="curved-shape2"></div>
         <div class="form-box Register">
-          <h2>Register</h2>
+          <h2>Регистрация</h2>
           <form class="form-signup" method="POST" action="{% url 'signup' %}">
             {% csrf_token %}
             <div class="input-box">
@@ -19,7 +19,7 @@
             <div class="input-box">
               <input type="email" name="email" required>
               <label for="">Email</label>
-              <i class="bx bxs-lock-alt"></i>
+              <i class="bx bxs-envelope"></i>
             </div>
             <div class="input-box">
               <input type="password" name="password1" required>

@@ -1,11 +1,12 @@
 {% extends "main/layout.html" %}
-{% block title %}
-{{ cats_title }} - все заметки
-{% endblock %}
+{% block title %} Создать заметку {% endblock %}
 {% block content %}
-
+<div class="container edit_note">
+ <div class="note_head_title">
+      <a href="{% url 'note' %}"><button class="btn btn-primary btn-lg btn-block">Назад</button></a>
+      <h1>Создать заметку</h1>
+    </div>
 <form action="{% url 'create_note' %}" method="post" class="create_note">
-    <h1>Создать заметку</h1>
     <div class="container input-note">
         {% csrf_token %}
         {{ form.title }}
@@ -20,4 +21,5 @@
         </div>
     </div>
 </form>
+      </div>
 {% endblock %}
