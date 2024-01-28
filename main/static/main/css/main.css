@@ -640,6 +640,7 @@ select.dropdown::-webkit-scrollbar-thumb {
 .profile_picture {
     display: inline;
     height: 75vh;
+    min-width: 30%;
 	max-width: 30%;
 }
 
@@ -654,18 +655,26 @@ select.dropdown::-webkit-scrollbar-thumb {
 }
 
 .profile_data {
-    display: inline;
     min-height: 100%;
 	min-width: 60%;
 }
 
 .user-info {
     display: grid;
-    grid-template-columns: 15% 33%
+    grid-template-columns: 15% 50% 35%;
+    align-items: baseline;
+    justify-items: left;
 }
 
 .user-info input {
     width: 200px;
 }
 
-.user-info .user_update {width: 200px;}
+.user-info .user_update {width: 150px;}
+
+.tg-connect {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    align-items: baseline;
+    justify-items: left;
+}

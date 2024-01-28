@@ -25,19 +25,15 @@
                     <button class="user_update" name="user_update">Сохранить</button>
                 </div>
                 <div class="user-update">
-                    <div class="clear-profile-pic">
-                        <label for="profile_pic-clear_id">Очистить</label>
-                        <input type="checkbox" name="profile_pic-clear" id="profile_pic-clear_id">
-                    </div>
                     <div class="profile-pic">
                         <input type="file" name="profile_pic" accept=".png,.jpg,.jpeg" id="id_profile_pic">
                         <button class="btn btn-outline-info" name="submit" type="submit">Обновить</button>
                     </div>
                 </div>
                 <div class="tg-connect">
-                    <label for="">Привязать Телеграмм аккаунт к боту</label>
+                    <label for="">Ключ для привязки:</label>
                     <p>{{ profile.tg_key }}</p>
-                    <button class="" name="connect-tg">Сгенерировать новый ключ</button>
+                    <button class="" name="connect-tg">Сгенерировать</button>
                 </div>
             </form>
         </div>

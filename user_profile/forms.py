@@ -5,12 +5,16 @@ from .models import Profile
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_pic', 'tg_id', 'tg_key']
+        fields = ['profile_pic']
+
+class ProfileTgKey(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['tg_id', 'tg_key']
         widgets = {
             'tg_id': forms.HiddenInput(),
             'tg_key': forms.HiddenInput(),
         }
-
 
 
 class UserUpdateForm(forms.ModelForm):

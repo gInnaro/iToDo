@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 import random, string
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from .models import Profile
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, ProfileTgKey
 
 
 def generator_telegram_key():
@@ -20,14 +20,14 @@ class UserProfile(TemplateView):
         if request.method == 'POST':
             if "submit" in request.POST:
                 u_form = UserUpdateForm(request.POST, instance=username)
-                p_form = ProfileUpdateForm(request.POST, request.FILES, instance=username.profile)
+                p_form = ProfileUpdateForm(request.FILES, instance=username.profile)
                 if u_form.is_valid() and p_form.is_valid():
                     u_form.save()
                     p_form.save()
                     return redirect('user_profile')
             elif "connect-tg" in request.POST:
                 key = generator_telegram_key()
-                form = ProfileUpdateForm(request.POST, request.FILES, instance=username.profile)
+                form = ProfileTgKey(request.POST, instance=username.profile)
                 if form.is_valid():
                     form.instance.tg_key = key
                     form.save()
@@ -46,5 +46,4 @@ class UserProfile(TemplateView):
             'p_form': p_form,
             'u_form': u_form,
         }
-
         return render(request, 'user_profile/user_profile.html', data)
