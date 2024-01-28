@@ -35,7 +35,7 @@
                         </div>
                     {% else %}
                     <div class="signs_suc">
-                        <label class="usersign">Привет, {{ user.username|default:'Guest' }}</label>
+                        <a href="{% url 'user_profile' %}"><label class="sign usersign">Привет, {{ user.username|default:'Guest' }}</label></a>
                         <a href="{% url 'logout' %}"><label class="sign"> Выход</label></a>
                         <a href="{% url 'chat' %}"><label class="sign"> Чат с GPT</label></a>
                     </div>

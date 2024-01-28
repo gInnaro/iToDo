@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <div class="header-bar">
+        <h1>Profile</h1>
+    </div>
+    <div class="">
+
+        {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}">
+        {% else %}
+            <img src="/media/default.jpg" height=100 width=100>
+        {% endif %}
+        <p><strong>Имя:</strong> {{ user.first_name }}</p>
+        <p><strong>Фамилия:</strong> {{ user.last_name }}</p>
+        <form method="POST" action='' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="user-info">
+                <p>{{ u_form.username }}</p>
+                <p>{{ u_form.email }}</p>
+                <button name="user_update">Сохранить</button>
+            </div>
+            <div class="user-update">
+                <div class="clear-profile-pic">
+                    <label for="profile_pic-clear_id">Очистить</label>
+                    <input type="checkbox" name="profile_pic-clear" id="profile_pic-clear_id">
+                </div>
+                <div class="profile-pic">
+                    <input type="file" name="profile_pic" accept=".png,.jpg,.jpeg" id="id_profile_pic">
+                    <button class="btn btn-outline-info" name="submit" type="submit">Обновить</button>
+                </div>
+            </div>
+            <div class="tg-connect">
+                <label for="">Привязать Телеграмм аккаунт к боту</label>
+                <p>{{ profile.tg_key }}</p>
+                <button class="" name="connect-tg">Сгенерировать новый ключ</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
