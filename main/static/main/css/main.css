@@ -659,18 +659,31 @@ select.dropdown::-webkit-scrollbar-thumb {
 	min-width: 60%;
 }
 
+.profile_data button {
+    width: 150px;
+}
+
 .user-info {
     display: grid;
-    grid-template-columns: 15% 50% 35%;
+    grid-template-columns: 10% 60% 30%;
     align-items: baseline;
     justify-items: left;
+}
+
+.user-info, .user-update, .tg-connect {
+    height: 50px;
 }
 
 .user-info input {
     width: 200px;
 }
 
-.user-info .user_update {width: 150px;}
+.user-update {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    align-items: baseline;
+    justify-items: left;
+}
 
 .tg-connect {
     display: grid;

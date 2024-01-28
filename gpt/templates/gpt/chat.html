@@ -8,7 +8,7 @@
     <div class="box" id="messages"></div>
     <div class="user-input">
         <div class="box input-boxs">
-            <textarea id="message-input" placeholder="Задать вопрос" cols="30" rows="10" style="white-space: pre-wrap; height: 80px;"></textarea>
+            <textarea id="message-input" placeholder="Задать вопрос" cols="30" rows="10" style="white-space: pre-wrap; height: 80px;" onkeydown="if(event.keyCode === 13) { gpt_submit(); }"></textarea>
             <div id="my_button"><i class="fa-regular fa-paper-plane-top"></i></div>
         </div>
     </div>
@@ -43,6 +43,10 @@
 </div>
 
 <script>
+    function gpt_submit() {
+        sendsAjax()
+    }
+
     var addButton = document.getElementById('my_button');
     function sendsAjax() {
         var message= document.getElementById("message-input").value;

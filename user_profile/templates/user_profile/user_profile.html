@@ -22,18 +22,16 @@
                 <div class="user-info">
                     <label>Email: </label>
                     <p>{{ u_form.email }}</p>
-                    <button class="user_update" name="user_update">Сохранить</button>
+                    <button class="user_update btn btn-outline-info" name="user_update">Сохранить</button>
                 </div>
                 <div class="user-update">
-                    <div class="profile-pic">
-                        <input type="file" name="profile_pic" accept=".png,.jpg,.jpeg" id="id_profile_pic">
-                        <button class="btn btn-outline-info" name="submit" type="submit">Обновить</button>
-                    </div>
+                    <input type="file" name="profile_pic" accept=".png,.jpg,.jpeg" id="id_profile_pic">
+                    <button class="btn btn-outline-info" name="submit" type="submit">Обновить</button>
                 </div>
                 <div class="tg-connect">
                     <label for="">Ключ для привязки:</label>
                     <p>{{ profile.tg_key }}</p>
-                    <button class="" name="connect-tg">Сгенерировать</button>
+                    <button class="btn btn-outline-info" name="connect-tg">Сгенерировать</button>
                 </div>
             </form>
         </div>
