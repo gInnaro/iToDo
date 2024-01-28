@@ -634,12 +634,23 @@ select.dropdown::-webkit-scrollbar-thumb {
 .profile {
     display: flex;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .profile_picture {
     display: inline;
-    min-height: 100%;
-	min-width: 40%;
+    height: 75vh;
+	max-width: 30%;
+}
+
+.profile_picture img {
+    max-width: 90%;
+    border: 1px solid #4d4d4d;
+}
+
+.profile_picture p {
+    padding-top: 5px;
+    margin: 0;
 }
 
 .profile_data {
