@@ -96,16 +96,15 @@ class Note_views(TemplateView):
             forms = NoteForm()
             return render(request, 'main/note/create_note.html', {'form': forms, 'categorys': category})
 
-    def note_detail(request, note_id):
+    def note_detail(request, note_id: int):
         note = Note.objects.get(id=note_id)
         cats_title = Category.objects.get(title=note.category_id)
-        print(cats_title)
         if request.method == 'POST':
             if "save_edit" in request.POST:
                 text = request.POST['note_description']
                 Note.objects.filter(id=note_id).update(description=text)
                 return redirect('note_detail', note_id)
-        return render(request, 'main/note/note_detail.html', {'note': note, 'cats_title': cats_title})
+        return render(request, 'main/note/note_detail.html', {'note_id': note_id, 'note': note, 'cats_title': cats_title})
 
 
 class RegisterUser(CreateView):

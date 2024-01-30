@@ -17,15 +17,15 @@
             <li class="Categories">
                 <a href="{% url 'detail' category.id %}"><b class="сategories_title">{{ category.title }}</b></a>
                 <a href="{% url 'edit_category' category.id %}"><button class="btn btn-primary edit btn_addition">Редактировать</button></a>
-                <button id="{{category.id}}" title="{{ category.title }}" onclick="JavaScript:return ValidatorCat(this.id);" class="btn btn-danger delete btn_addition">Удалить</button>
+                <button id="{{category.id}}" title="{{ category.title }}" onclick="JavaScript:return DeleteNote(this.id);" class="btn btn-danger delete btn_addition">Удалить</button>
             </li>
         {% endfor %}
         </div>
         <script>
-            function ValidatorCat(id_){
+            function DeleteNote(id_){
                var ttt= document.getElementById(id_);
                if(confirm("Вы точно хотите удалить заметку "+ttt.title+" ?") ){
-                 document.location.href = 'category/delete/'+ ttt.id;
+                 alert(document.location.href = 'category/delete/'+ ttt.id);
                }
             }
         </script>

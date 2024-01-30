@@ -13,7 +13,7 @@
       <div class="btn-note">
         <button id="edit_edit" class="btn btn-primary note-edit btn_addition mbtn" onclick="EditNote()">Редактировать</button>
         <button id="save_edit" name="save_edit" style="background: #6b6f7e;" disabled="disabled" class="btn btn-success note-save btn_addition mbtn">Сохранить</button>
-        <button id="delete_note" title="{{ note.title }}" onclick="JavaScript:return DeleteNote(this.id);" class="btn btn-danger note-delete btn_addition mbtn">Удалить</button>
+        <button id="{{ note.id }}" name="delete_btn" title="{{ note.title }}" onclick="JavaScript:return DeleteNote(this.id);" class="btn btn-danger note-delete btn_addition mbtn">Удалить</button>
       </div>
     </form>
   </div>
@@ -21,7 +21,7 @@
   const note_description = document.getElementById('note_description');
   const saveBtn = document.getElementById('save_edit');
   const editBtn = document.getElementById('edit_edit');
-  const delete_note = document.getElementById('delete_note');
+  const deleteBtn = document.getElementsByName('delete_btn');
 
   function EditNote() {
       note_description.removeAttribute('disabled');
@@ -30,14 +30,20 @@
         saveBtn.removeAttribute('style');
         editBtn.disabled = true;
         editBtn.style = "background: #6b6f7e;";
+        deleteBtn[0].textContent  = 'Отмена';
       }
   }
   function DeleteNote(id_){
-    var ttt= document.getElementById(id_);
-    if(confirm("Вы точно хотите изменить название категории "+ttt.title+" ?") ){
-      document.location.href = '';
-    }
-  }
+      var ttt= document.getElementById(id_);
+      if (deleteBtn[0].textContent  == 'Отмена') {
+        deleteBtn[0].textContent  = 'Отмена';
+      }
+      else {
+        if(confirm("Вы точно хотите удалить заметку "+ttt.title+" ?") ){
+          document.location.href = 'delete/'+ ttt.id;
+          }
+        }
+      }
 </script>
 
 {% endblock %}
