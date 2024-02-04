@@ -37,7 +37,10 @@
                     {% else %}
                     <div class="signs_suc">
                         <a href="{% url 'user_profile' %}"><label class="sign usersign">Привет, {{ user.username|default:'Guest' }}</label></a>
-                        <a href="{% url 'logout' %}"><label class="sign"> Выход</label></a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="sign"> Выход</button>
+                        </form>
                         <a href="{% url 'chat' %}"><label class="sign"> Чат с GPT</label></a>
                     </div>
                   {% endif %}

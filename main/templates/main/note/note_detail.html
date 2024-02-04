@@ -13,7 +13,7 @@
       <div class="btn-note">
         <button id="edit_edit" class="btn btn-primary note-edit btn_addition mbtn" onclick="EditNote()">Редактировать</button>
         <button id="save_edit" name="save_edit" style="background: #6b6f7e;" disabled="disabled" class="btn btn-success note-save btn_addition mbtn">Сохранить</button>
-        <button id="{{ note.id }}" name="delete_btn" title="{{ note.title }}" onclick="JavaScript:return DeleteNote(this.id);" class="btn btn-danger note-delete btn_addition mbtn">Удалить</button>
+        <button id="{{ note.id }}" name="delete_btn" title="{{ note.title }}" class="btn btn-danger note-delete btn_addition mbtn">Удалить</button>
       </div>
     </form>
   </div>
@@ -33,17 +33,16 @@
         deleteBtn[0].textContent  = 'Отмена';
       }
   }
-  function DeleteNote(id_){
-      var ttt= document.getElementById(id_);
-      if (deleteBtn[0].textContent  == 'Отмена') {
-        deleteBtn[0].textContent  = 'Отмена';
+  deleteBtn[0].addEventListener('click', function() {
+    const id = this.id;
+    const title = this.title;
+    var ttt= deleteBtn[0];
+    var result = confirm("Вы точно хотите удалить заметку "+ title +" ?");
+    if (result) {
+        document.location.href = '/category/delete_'+ id;
+        alert("Заметка удалена! ");
       }
-      else {
-        if(confirm("Вы точно хотите удалить заметку "+ttt.title+" ?") ){
-          document.location.href = 'delete/'+ ttt.id;
-          }
-        }
-      }
+    });
 </script>
 
 {% endblock %}

@@ -128,7 +128,20 @@ div.signs_suc a, label {
     transition: transform .1s ease;
 }
 
-div.signs_suc label:hover, div.signs_suc a:hover {
+.signs_suc button.sign {
+    font-family: Manrope,sans-serif!important;
+    color: #000;
+    width: 150px;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    text-align: left;
+    transition: transform .1s ease;
+}
+
+div.signs_suc label:hover, div.signs_suc a:hover, .signs_suc button.sign:hover {
     color: var(--color1);
     text-decoration: none;
     transform: scale(1.05);
